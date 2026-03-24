@@ -1,0 +1,35 @@
+[
+  {
+    "name": "morning-brief",
+    "schedule": { "kind": "cron", "expr": "0 8 * * *", "tz": "STUDENT_TIMEZONE" },
+    "payload": {
+      "kind": "agentTurn",
+      "message": "Run the morning brief for this student. Check their academic state for today's and this week's deadlines. Check their calendar for today's events if connected. Compose and send a brief, friendly morning text. Follow the nudge-engine rules for tone and throttling. Do NOT send if quiet mode is active or if 3 nudges have already been sent today."
+    },
+    "delivery": { "mode": "announce", "channel": "sms" }
+  },
+  {
+    "name": "deadline-check",
+    "schedule": { "kind": "cron", "expr": "0 10,14,18 * * *", "tz": "STUDENT_TIMEZONE" },
+    "payload": {
+      "kind": "agentTurn",
+      "message": "Check for unsubmitted assignments due in the next 24 hours. If any exist AND we haven't already nudged about them today AND we haven't hit the 3-nudge daily limit AND quiet mode is not active: send a brief, helpful reminder. If nothing is urgent, do nothing."
+    }
+  },
+  {
+    "name": "weekly-preview",
+    "schedule": { "kind": "cron", "expr": "0 18 * * 0", "tz": "STUDENT_TIMEZONE" },
+    "payload": {
+      "kind": "agentTurn",
+      "message": "It's Sunday evening. Send the student a preview of what's coming this week. List all assignments due in the next 7 days. Keep it light — it's the weekend. Offer to help plan their study time. Follow nudge throttling rules."
+    }
+  },
+  {
+    "name": "canvas-refresh",
+    "schedule": { "kind": "cron", "expr": "0 8,12,16,20 * * *", "tz": "STUDENT_TIMEZONE" },
+    "payload": {
+      "kind": "agentTurn",
+      "message": "Silently refresh this student's Canvas data. Pull courses, assignments, submissions, and grades. Update the local academic state file. Only message the student if: (a) a brand new assignment appeared that's due within 7 days, or (b) a grade was just posted. Otherwise, do nothing visible."
+    }
+  }
+]

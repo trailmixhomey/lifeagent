@@ -1,0 +1,102 @@
+{
+  "UC Berkeley": {
+    "canvas_url": "https://bcourses.berkeley.edu",
+    "nickname": "bCourses",
+    "timezone": "America/Los_Angeles"
+  },
+  "UCLA": {
+    "canvas_url": "https://bruinlearn.ucla.edu",
+    "nickname": "BruinLearn",
+    "timezone": "America/Los_Angeles"
+  },
+  "Stanford": {
+    "canvas_url": "https://canvas.stanford.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles"
+  },
+  "University of Michigan": {
+    "canvas_url": "https://umich.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York"
+  },
+  "University of Texas Austin": {
+    "canvas_url": "https://utexas.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago"
+  },
+  "University of Florida": {
+    "canvas_url": "https://ufl.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York"
+  },
+  "Ohio State University": {
+    "canvas_url": "https://osu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York"
+  },
+  "University of Washington": {
+    "canvas_url": "https://canvas.uw.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles"
+  },
+  "NYU": {
+    "canvas_url": "https://newclasses.nyu.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York"
+  },
+  "University of Wisconsin Madison": {
+    "canvas_url": "https://canvas.wisc.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago"
+  },
+  "Penn State": {
+    "canvas_url": "https://psu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York"
+  },
+  "University of Illinois": {
+    "canvas_url": "https://canvas.illinois.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago"
+  },
+  "Indiana University": {
+    "canvas_url": "https://iu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York"
+  },
+  "University of Colorado Boulder": {
+    "canvas_url": "https://canvas.colorado.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Denver"
+  },
+  "Arizona State University": {
+    "canvas_url": "https://canvas.asu.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Phoenix"
+  },
+  "University of Virginia": {
+    "canvas_url": "https://canvas.virginia.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York"
+  },
+  "Northwestern": {
+    "canvas_url": "https://canvas.northwestern.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago"
+  },
+  "Boston University": {
+    "canvas_url": "https://learn.bu.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York"
+  },
+  "University of Minnesota": {
+    "canvas_url": "https://canvas.umn.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago"
+  },
+  "Purdue": {
+    "canvas_url": "https://purdue.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York"
+  }
+}

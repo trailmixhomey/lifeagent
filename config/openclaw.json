@@ -1,0 +1,28 @@
+{
+  "gateway": {
+    "name": "StudyClaw",
+    "port": 3000,
+    "soul": "./SOUL.md",
+    "agents": "./AGENTS.md",
+    "skills_dir": "./skills",
+    "data_dir": "./data"
+  },
+  "ai": {
+    "provider": "anthropic",
+    "models": {
+      "default": "claude-sonnet-4-6",
+      "lightweight": "claude-haiku-4-5-20251001"
+    }
+  },
+  "channels": {
+    "sms": {
+      "provider": "twilio",
+      "webhook_path": "/sms/inbound"
+    }
+  },
+  "session": {
+    "isolation": "per-phone-number",
+    "data_dir": "./data/students",
+    "memory": true
+  }
+}

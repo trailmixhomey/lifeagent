@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connect Calendar - StudyClaw</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>StudyClaw</h1>
+      <p>Connect your Google Calendar so I can help you plan study time and check your schedule.</p>
+      <a class="btn" id="connect-btn">Connect Google Calendar</a>
+      <p class="fine-print">StudyClaw can read your events and add study time. We'll never modify or delete your existing events.</p>
+    </div>
+  </div>
+  <script>
+    document.getElementById('connect-btn').href = window.location.pathname + '/auth';
+  </script>
+</body>
+</html>
