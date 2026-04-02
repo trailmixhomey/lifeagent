@@ -15,9 +15,11 @@
     }
   },
   "channels": {
-    "sms": {
-      "provider": "twilio",
-      "webhook_path": "/sms/inbound"
+    "whatsapp": {
+      "dmPolicy": "open",
+      "allowFrom": ["*"],
+      "sendReadReceipts": true,
+      "textChunkLimit": 4000
     }
   },
   "session": {

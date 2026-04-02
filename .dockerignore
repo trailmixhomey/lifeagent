@@ -1,6 +1,7 @@
 node_modules/
 data/students/
-data/whatsapp-auth/
 .env
+.git/
 *.log
 .DS_Store
+tests/

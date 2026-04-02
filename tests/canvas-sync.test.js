@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { classifyCanvasError } from '../lib/canvas-client.js';
+import { classifyCanvasError, CanvasClient } from '../lib/canvas-client.js';
 
 describe('Canvas Client', () => {
   describe('classifyCanvasError', () => {
@@ -66,12 +66,34 @@ describe('Canvas Client', () => {
 
   describe('Assignment Classification', () => {
     it('should classify common assignment types from names', async () => {
-      // Import the internal classify function by testing through CanvasClient
-      const { CanvasClient } = await import('../lib/canvas-client.js');
-
-      // We can't easily test the private function directly, but we can
-      // verify the classification logic by checking the module exports
       assert.ok(CanvasClient, 'CanvasClient should be exported');
+    });
+  });
+
+  describe('Link Header Pagination', () => {
+    const client = new CanvasClient('https://example.com', 'fake-token');
+
+    it('should parse Link header with next URL', () => {
+      const header = '<https://example.com/api/v1/courses?page=2&per_page=50>; rel="next", <https://example.com/api/v1/courses?page=5&per_page=50>; rel="last"';
+      const next = client._parseLinkNext(header);
+      assert.equal(next, 'https://example.com/api/v1/courses?page=2&per_page=50');
+    });
+
+    it('should return null when no next link exists', () => {
+      const header = '<https://example.com/api/v1/courses?page=5&per_page=50>; rel="last"';
+      const next = client._parseLinkNext(header);
+      assert.equal(next, null);
+    });
+
+    it('should return null for null input', () => {
+      assert.equal(client._parseLinkNext(null), null);
+      assert.equal(client._parseLinkNext(undefined), null);
+    });
+
+    it('should handle next-only Link header', () => {
+      const header = '<https://example.com/api/v1/assignments?page=3>; rel="next"';
+      const next = client._parseLinkNext(header);
+      assert.equal(next, 'https://example.com/api/v1/assignments?page=3');
     });
   });
 });

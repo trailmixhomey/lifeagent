@@ -3,9 +3,10 @@
  * Manages the OAuth flow initiated from the calendar-connect web page.
  */
 
+import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { getAuthUrl, exchangeCode } from '../lib/calendar-client.js';
-import { saveGCalTokens } from '../lib/student-store.js';
-import { updateProfile } from '../lib/student-store.js';
+import { saveGCalTokens, updateProfile } from '../lib/student-store.js';
 import { validateSetupToken, lookupToken } from './setup-tokens.js';
 
 /**
@@ -21,16 +22,15 @@ export function handleConnectPage(req, res) {
   }
 
   // Serve the connect page
-  res.sendFile('calendar-connect.html', {
-    root: new URL('../../web', import.meta.url).pathname,
-  });
+  const webDir = join(fileURLToPath(import.meta.url), '..', '..', 'web');
+  res.sendFile(join(webDir, 'calendar-connect.html'));
 }
 
 /**
  * Start the OAuth flow when user clicks "Connect Google Calendar".
  * GET /connect/calendar/:token/auth
  */
-export function handleAuthStart(req, res) {
+export async function handleAuthStart(req, res) {
   const { token } = req.params;
   const phone = lookupToken(token);
 
@@ -38,7 +38,7 @@ export function handleAuthStart(req, res) {
     return res.status(400).send(expiredPage());
   }
 
-  const authUrl = getAuthUrl(token);
+  const authUrl = await getAuthUrl(token);
   res.redirect(authUrl);
 }
 

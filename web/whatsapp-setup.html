@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyClaw - WhatsApp Setup</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a;
+      color: #e5e5e5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 460px;
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .subtitle {
+      color: #888;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .status-card {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .status-dot.connected { background: #22c55e; }
+    .status-dot.waiting { background: #eab308; animation: pulse 1.5s infinite; }
+    .status-dot.disconnected { background: #666; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .phone-number {
+      font-size: 1.1rem;
+      color: #22c55e;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    .qr-container {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1rem;
+      display: inline-block;
+      margin: 1rem 0;
+    }
+
+    .qr-container canvas {
+      display: block;
+    }
+
+    .instructions {
+      font-size: 0.85rem;
+      color: #888;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+
+    .instructions ol {
+      text-align: left;
+      display: inline-block;
+      padding-left: 1.2rem;
+    }
+
+    .success-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .error {
+      color: #ef4444;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #666;
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>StudyClaw</h1>
+    <p class="subtitle">Connect your WhatsApp to start messaging students</p>
+
+    <div class="status-card" id="card">
+      <div><span class="spinner"></span> Checking connection...</div>
+    </div>
+  </div>
+
+  <script type="module">
+    import QRCode from 'https://esm.sh/qrcode@1.5.4';
+
+    const card = document.getElementById('card');
+    let currentQr = null;
+    let polling = false;
+
+    async function poll() {
+      if (polling) return;
+      polling = true;
+
+      while (true) {
+        try {
+          const res = await fetch('/admin/whatsapp/status');
+          const data = await res.json();
+
+          if (data.status === 'connected') {
+            showConnected(data.phone);
+            polling = false;
+            return;
+          }
+
+          if (data.qr && data.qr !== currentQr) {
+            currentQr = data.qr;
+            await showQrCode(data.qr);
+          } else if (!data.qr && data.status === 'disconnected') {
+            showWaiting();
+          }
+        } catch (err) {
+          console.error('Poll error:', err);
+        }
+
+        await new Promise(r => setTimeout(r, 2000));
+      }
+    }
+
+    function showConnected(phone) {
+      card.innerHTML = `
+        <div class="success-icon">&#x2705;</div>
+        <p><span class="status-dot connected"></span> WhatsApp connected</p>
+        ${phone ? `<p class="phone-number">+${phone}</p>` : ''}
+        <p class="instructions" style="margin-top: 1.5rem;">
+          StudyClaw is listening for messages. Students can text this number on WhatsApp to get started.
+        </p>
+      `;
+    }
+
+    function showWaiting() {
+      if (card.querySelector('.spinner')) return;
+      card.innerHTML = `
+        <p><span class="status-dot waiting"></span> <span class="spinner"></span> Waiting for WhatsApp...</p>
+      `;
+    }
+
+    async function showQrCode(qrString) {
+      card.innerHTML = `
+        <p><span class="status-dot waiting"></span> Scan to connect</p>
+        <div class="qr-container">
+          <canvas id="qr-canvas"></canvas>
+        </div>
+        <div class="instructions">
+          <ol>
+            <li>Open WhatsApp on your phone</li>
+            <li>Go to Settings &gt; Linked Devices</li>
+            <li>Tap "Link a Device"</li>
+            <li>Point your camera at this QR code</li>
+          </ol>
+        </div>
+      `;
+
+      try {
+        await QRCode.toCanvas(document.getElementById('qr-canvas'), qrString, {
+          width: 256,
+          margin: 1,
+          color: { dark: '#000000', light: '#ffffff' },
+        });
+      } catch (err) {
+        card.innerHTML += `<p class="error">Failed to render QR code: ${err.message}</p>`;
+      }
+    }
+
+    poll();
+  </script>
+</body>
+</html>

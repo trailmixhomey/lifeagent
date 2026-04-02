@@ -18,10 +18,17 @@ import {
   getCanvasToken,
   hasCalendar,
   getGCalTokens,
+  getCustomDeadlines,
+  getCuratedMemory,
+  getRecentMemory,
+  saveCuratedMemory,
+  listDailyMemoryFiles,
+  getCommitments,
+  updateCommitments,
 } from '../lib/student-store.js';
 import { CanvasClient } from '../lib/canvas-client.js';
 import { getEvents } from '../lib/calendar-client.js';
-import { sendSms } from './sms-handler.js';
+import { sendMessage } from './sms-handler.js';
 import { createHash } from 'node:crypto';
 
 const anthropic = new Anthropic();
@@ -132,6 +139,7 @@ async function morningBrief(phone) {
   if (!(await canNudge(phone))) return;
 
   const profile = await getProfile(phone);
+  if (profile.preferences?.morning_brief === false) return;
   const state = await getAcademicState(phone);
   const soul = await getSoul();
   const now = new Date();
@@ -140,7 +148,12 @@ async function morningBrief(phone) {
     .filter((a) => !a.submitted && new Date(a.due_at) > now)
     .slice(0, 10);
 
-  if (upcoming.length === 0) return; // nothing to report
+  // Custom deadlines (student-added)
+  const customData = await getCustomDeadlines(phone);
+  const upcomingCustom = customData.deadlines.filter((d) => {
+    const dueDate = new Date(d.date);
+    return dueDate > now;
+  }).slice(0, 10);
 
   let calendarContext = '';
   if (await hasCalendar(phone)) {
@@ -157,33 +170,114 @@ async function morningBrief(phone) {
     }
   }
 
-  const assignmentList = upcoming
-    .map((a) => {
-      const due = new Date(a.due_at).toLocaleString('en-US', {
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit',
-        timeZone: profile.timezone,
-      });
-      return `- ${a.course_name}: ${a.name}, due ${due}`;
-    })
-    .join('\n');
+  // Nothing to report from any source
+  if (upcoming.length === 0 && upcomingCustom.length === 0 && !calendarContext) return;
+
+  let assignmentList = '';
+  if (upcoming.length > 0) {
+    assignmentList = upcoming
+      .map((a) => {
+        const due = new Date(a.due_at).toLocaleString('en-US', {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit',
+          timeZone: profile.timezone,
+        });
+        return `- ${a.course_name}: ${a.name}, due ${due}`;
+      })
+      .join('\n');
+  }
+
+  let customList = '';
+  if (upcomingCustom.length > 0) {
+    customList = upcomingCustom
+      .map((d) => `- ${d.course || 'General'}: ${d.name}, ${d.date}${d.type ? ` (${d.type})` : ''}`)
+      .join('\n');
+  }
 
   const dayOfWeek = now.toLocaleDateString('en-US', {
     weekday: 'long',
     timeZone: profile.timezone,
   });
 
-  const prompt = `Compose a morning brief text message for ${profile.name}. It's ${dayOfWeek} morning.
+  // Pull curated memory for context
+  const memory = await getCuratedMemory(phone);
+  let memoryContext = '';
+  if (memory) {
+    memoryContext = `\nWhat you know about this student:\n${memory}\n`;
+  }
+
+  // Check active commitments and mark overdue ones
+  const commitments = await getCommitments(phone);
+  let commitmentContext = '';
+  const today = now.toISOString().split('T')[0];
+  const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  let hasOverdue = false;
+  for (const c of commitments) {
+    if (c.status === 'pending' && c.due && c.due < today) {
+      c.status = 'overdue';
+      hasOverdue = true;
+    }
+  }
+  if (hasOverdue) await updateCommitments(phone, commitments);
+
+  // Send dedicated follow-up for commitments due yesterday or recently overdue
+  const followUps = commitments.filter(
+    (c) => c.status === 'overdue' && c.due && c.due >= yesterday
+  );
+  if (followUps.length > 0) {
+    const followUpPrompt = `Send a quick follow-up text to ${profile.name} about something they committed to. Keep it curious and light, not accusatory.
+
+Their commitment(s):
+${followUps.map((c) => `- "${c.text}" (said on ${c.committed || 'recently'})`).join('\n')}
+
+Examples of good follow-ups:
+- "did you get to that essay last night?"
+- "how'd the study session go?"
+
+Rules:
+- ONE short message, under 200 characters
+- Curious tone, not judgmental
+- Don't stack multiple follow-ups — just ask about the most recent one
+- Use ${profile.vibe || 'chill'} vibe`;
+
+    const followUpResponse = await anthropic.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 256,
+      system: soul,
+      messages: [{ role: 'user', content: followUpPrompt }],
+    });
+
+    const followUpText = followUpResponse.content[0].text;
+    const followUpRecorded = await recordNudge(phone, 'commitment_followup', followUpText);
+    if (followUpRecorded) {
+      await sendMessage(phone, followUpText);
+    }
+  }
+
+  const pending = commitments.filter((c) => c.status === 'pending' || c.status === 'overdue');
+  if (pending.length > 0) {
+    commitmentContext = `\nTheir active commitments:\n${pending.map((c) => `- ${c.status === 'overdue' ? '[OVERDUE] ' : ''}${c.text}${c.committed ? ` (said on ${c.committed})` : ''}`).join('\n')}\n`;
+  }
+
+  // If the only thing to report is commitments we already followed up on, skip the morning brief
+  if (upcoming.length === 0 && upcomingCustom.length === 0 && !calendarContext && followUps.length > 0) return;
+
+  const prompt = `Compose a morning check-in text message for ${profile.name}. It's ${dayOfWeek} morning. You're their study coach.
 ${calendarContext}
-Upcoming assignments:
-${assignmentList}
+${assignmentList ? `Upcoming assignments (from Canvas):\n${assignmentList}` : ''}
+${customList ? `Upcoming deadlines (student-added):\n${customList}` : ''}
+${!assignmentList && !customList && calendarContext ? '(No assignments or deadlines tracked — just calendar events today)' : ''}
+${memoryContext}${commitmentContext}
 
 Rules:
 - Keep it brief and casual (it's a text message)
 - Mention what's due today first, then this week
+- Don't ask about commitments you already followed up on (that was sent separately)
+- If they've been consistent lately, acknowledge it briefly
+- If they're ahead, suggest stretching a little ("good spot to get ahead on X")
 - Vary the opening (don't always start with "Morning!")
 - Max 300 characters if possible
 - Don't use the word "brief" or "update"
@@ -199,7 +293,7 @@ Rules:
   const text = response.content[0].text;
   const recorded = await recordNudge(phone, 'morning_brief', text);
   if (recorded) {
-    await sendSms(phone, text);
+    await sendMessage(phone, text);
   }
 }
 
@@ -212,9 +306,11 @@ async function deadlineCheck(phone) {
   if (reduced) return;
 
   const profile = await getProfile(phone);
+  if (profile.preferences?.deadline_nudges === false) return;
   const state = await getAcademicState(phone);
   const now = new Date();
   const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+  const soul = await getSoul();
 
   const urgent = state.assignments.filter(
     (a) =>
@@ -223,12 +319,22 @@ async function deadlineCheck(phone) {
       new Date(a.due_at) <= tomorrow
   );
 
-  if (urgent.length === 0) return;
+  // Also check custom deadlines
+  const customData = await getCustomDeadlines(phone);
+  const urgentCustom = customData.deadlines.filter((d) => {
+    const dueDate = new Date(d.date);
+    return dueDate > now && dueDate <= tomorrow;
+  });
 
-  const soul = await getSoul();
+  const allUrgent = [
+    ...urgent.map((a) => ({ name: a.name, course: a.course_name, due: a.due_at, source: 'canvas' })),
+    ...urgentCustom.map((d) => ({ name: d.name, course: d.course || 'General', due: d.date, source: 'custom' })),
+  ];
 
-  for (const assignment of urgent) {
-    const dueStr = new Date(assignment.due_at).toLocaleString('en-US', {
+  if (allUrgent.length === 0) return;
+
+  for (const item of allUrgent) {
+    const dueStr = new Date(item.due).toLocaleString('en-US', {
       weekday: 'long',
       hour: 'numeric',
       minute: '2-digit',
@@ -236,7 +342,7 @@ async function deadlineCheck(phone) {
     });
 
     const prompt = `Compose a brief deadline reminder text for ${profile.name}.
-Assignment: ${assignment.course_name} — ${assignment.name}
+Assignment: ${item.course} — ${item.name}
 Due: ${dueStr}
 Calendar connected: ${profile.calendar_connected ? 'yes' : 'no'}
 
@@ -252,7 +358,7 @@ Keep it short, friendly, encouraging. Don't be preachy.`;
     const text = response.content[0].text;
     const recorded = await recordNudge(phone, 'deadline_warning', text);
     if (recorded) {
-      await sendSms(phone, text);
+      await sendMessage(phone, text);
     }
   }
 }
@@ -264,6 +370,7 @@ async function weeklyPreview(phone) {
   if (!(await canNudge(phone))) return;
 
   const profile = await getProfile(phone);
+  if (profile.preferences?.weekly_preview === false) return;
   const state = await getAcademicState(phone);
   const soul = await getSoul();
   const now = new Date();
@@ -276,20 +383,35 @@ async function weeklyPreview(phone) {
       new Date(a.due_at) <= nextWeek
   );
 
-  if (thisWeek.length === 0) return;
+  const customData = await getCustomDeadlines(phone);
+  const customThisWeek = customData.deadlines.filter((d) => {
+    const dueDate = new Date(d.date);
+    return dueDate > now && dueDate <= nextWeek;
+  });
 
-  const list = thisWeek
-    .map((a) => {
-      const due = new Date(a.due_at).toLocaleDateString('en-US', {
-        weekday: 'long',
-        timeZone: profile.timezone,
-      });
-      return `- ${a.course_name} — ${a.name}, due ${due}`;
-    })
-    .join('\n');
+  if (thisWeek.length === 0 && customThisWeek.length === 0) return;
+
+  let list = '';
+  if (thisWeek.length > 0) {
+    list += thisWeek
+      .map((a) => {
+        const due = new Date(a.due_at).toLocaleDateString('en-US', {
+          weekday: 'long',
+          timeZone: profile.timezone,
+        });
+        return `- ${a.course_name} — ${a.name}, due ${due}`;
+      })
+      .join('\n');
+  }
+  if (customThisWeek.length > 0) {
+    if (list) list += '\n';
+    list += customThisWeek
+      .map((d) => `- ${d.course || 'General'} — ${d.name}, ${d.date}${d.type ? ` (${d.type})` : ''}`)
+      .join('\n');
+  }
 
   const prompt = `Compose a Sunday evening weekly preview text for ${profile.name}.
-Assignments due this week:
+Due this week:
 ${list}
 
 Keep it light — it's the weekend. Offer to help plan study time.`;
@@ -304,7 +426,7 @@ Keep it light — it's the weekend. Offer to help plan study time.`;
   const text = response.content[0].text;
   const recorded = await recordNudge(phone, 'weekly_preview', text);
   if (recorded) {
-    await sendSms(phone, text);
+    await sendMessage(phone, text);
   }
 }
 
@@ -350,7 +472,16 @@ async function canvasRefresh(phone) {
       (a) => a.grade != null && !oldGrades.has(a.id)
     );
 
+    // Check for changed grades (regrades, curves, etc.)
+    const changedGrades = assignments.filter((a) => {
+      if (a.grade == null || !oldGrades.has(a.id)) return false;
+      const oldScore = oldGrades.get(a.id);
+      const newScore = a.score != null ? a.score : a.grade;
+      return String(oldScore) !== String(newScore);
+    });
+
     if (!(await canNudge(phone))) return;
+    if (profile.preferences?.grade_notifications === false) return;
 
     // Notify about new assignments
     for (const a of newAssignments) {
@@ -360,7 +491,7 @@ async function canvasRefresh(phone) {
       });
       const msg = `New assignment just posted — ${a.course_name} has ${a.name} due ${dueDay}. I'll include it in your morning updates.`;
       const recorded = await recordNudge(phone, 'new_assignment', msg);
-      if (recorded) await sendSms(phone, msg);
+      if (recorded) await sendMessage(phone, msg);
     }
 
     // Notify about new grades
@@ -374,10 +505,135 @@ async function canvasRefresh(phone) {
         msg = `Your ${a.course_name} ${a.name} grade is posted — ${score}${total ? `/${total}` : ''}.`;
       }
       const recorded = await recordNudge(phone, 'grade_notification', msg);
-      if (recorded) await sendSms(phone, msg);
+      if (recorded) await sendMessage(phone, msg);
+    }
+
+    // Notify about changed grades
+    for (const a of changedGrades) {
+      const oldScore = oldGrades.get(a.id);
+      const newScore = a.score != null ? a.score : a.grade;
+      const total = a.points_possible;
+      let msg;
+      if (typeof newScore === 'number' && typeof oldScore === 'number' && newScore > oldScore) {
+        msg = `Your ${a.course_name} ${a.name} grade was updated — ${oldScore}${total ? `/${total}` : ''} → ${newScore}${total ? `/${total}` : ''}. Nice bump!`;
+      } else {
+        msg = `Heads up, your ${a.course_name} ${a.name} grade was updated — now showing ${newScore}${total ? `/${total}` : ''} (was ${oldScore}${total ? `/${total}` : ''}).`;
+      }
+      const recorded = await recordNudge(phone, 'grade_notification', msg);
+      if (recorded) await sendMessage(phone, msg);
     }
   } catch {
     // Silent failure — will retry on next cron run
+  }
+}
+
+/**
+ * Pattern recognition: analyze recent memory and academic data
+ * to surface behavioral patterns. Appends to MEMORY.md.
+ */
+async function analyzePatterns(phone, recentNotes, curatedMemory) {
+  const state = await getAcademicState(phone);
+  const profile = await getProfile(phone);
+
+  // Build academic context — recent submissions and grades
+  const submitted = state.assignments
+    .filter((a) => a.submitted)
+    .slice(-15)
+    .map((a) => `${a.course_name}: ${a.name}${a.grade != null ? ` (grade: ${a.grade})` : ''} — submitted${a.submitted_at ? ` ${a.submitted_at}` : ''}`)
+    .join('\n');
+
+  const prompt = `Analyze these memory notes and academic data about a college student. Identify 3-5 behavioral patterns.
+
+Memory notes from the last 30 days:
+${recentNotes}
+
+${submitted ? `Recent submissions/grades:\n${submitted}\n` : ''}
+
+Focus on:
+- When they tend to work (time of day, day of week)
+- How they handle different assignment types (essays vs problem sets vs labs)
+- Procrastination patterns or early completion habits
+- How they respond to stress or heavy workloads
+- Consistency trends (getting better/worse/stable)
+
+Write 3-5 concise pattern observations as bullet points. Only include patterns with evidence — don't speculate.
+If there isn't enough data to identify patterns, respond with: NONE`;
+
+  const response = await anthropic.messages.create({
+    model: 'claude-sonnet-4-6',
+    max_tokens: 512,
+    messages: [{ role: 'user', content: prompt }],
+  });
+
+  const patterns = response.content[0].text.trim();
+  if (patterns === 'NONE' || patterns.length <= 10) return;
+
+  // Append patterns section to curated memory
+  const updated = `${curatedMemory}\n\n## Behavioral Patterns\n${patterns}`;
+  await saveCuratedMemory(phone, updated);
+}
+
+/**
+ * Memory curation: merge daily memory files into a compact MEMORY.md.
+ * Runs weekly (Sunday 5pm student time) before the weekly preview.
+ */
+async function curateMemory(phone) {
+  const profile = await getProfile(phone);
+  if (!profile?.setup_complete) return;
+
+  const dailyFiles = await listDailyMemoryFiles(phone);
+  if (dailyFiles.length === 0) return;
+
+  // Load all daily files from the last 30 days
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+  const cutoff = thirtyDaysAgo.toISOString().split('T')[0];
+
+  const recentFiles = dailyFiles.filter((f) => f.replace('.md', '') >= cutoff);
+  if (recentFiles.length === 0) return;
+
+  const recentNotes = await getRecentMemory(phone, 30);
+  const currentCurated = await getCuratedMemory(phone);
+
+  const prompt = `You are maintaining a concise memory file about a college student for their study coach.
+
+${currentCurated ? `Current curated memory:\n${currentCurated}\n\n` : ''}Recent daily notes:\n${recentNotes}
+
+Merge everything into a single curated summary. Rules:
+- KEEP: preferences, habits, schedule constraints, personal details, major/year, behavioral patterns, study preferences, active commitments
+- DROP: one-time events that already passed, assignments already submitted, ephemeral facts
+- Format as bullet points, no headers
+- Keep it under 30 bullet points
+- Preserve the most recent and most durable facts
+- If a recent note contradicts an older fact, keep the recent version
+
+Curated summary:`;
+
+  const response = await anthropic.messages.create({
+    model: 'claude-sonnet-4-6',
+    max_tokens: 1024,
+    messages: [{ role: 'user', content: prompt }],
+  });
+
+  const curated = response.content[0].text.trim();
+  await saveCuratedMemory(phone, curated);
+
+  // Pattern recognition — analyze memory + academic data for behavioral insights
+  if (recentFiles.length >= 5) {
+    await analyzePatterns(phone, recentNotes, curated);
+  }
+
+  // Clean up daily files older than 30 days
+  const { unlink } = await import('node:fs/promises');
+  const { join: joinPath } = await import('node:path');
+  const staleFiles = dailyFiles.filter((f) => f.replace('.md', '') < cutoff);
+  for (const f of staleFiles) {
+    try {
+      const memDir = joinPath(process.cwd(), 'data', 'students', phone.replace('+', ''), 'memory');
+      await unlink(joinPath(memDir, f));
+    } catch {
+      // skip if already gone
+    }
   }
 }
 
@@ -432,6 +688,31 @@ export function startCronJobs() {
         }
       } catch (err) {
         console.error(`Deadline check error for ${phone}:`, err);
+      }
+    }
+  });
+
+  // Memory curation — Sunday at 5pm student time (before weekly preview)
+  cron.schedule('0 * * * 0', async () => {
+    const students = await listAllStudents();
+    for (const phone of students) {
+      try {
+        const profile = await getProfile(phone);
+        if (!profile?.setup_complete) continue;
+
+        const hour = parseInt(
+          new Date().toLocaleTimeString('en-US', {
+            hour: 'numeric',
+            hour12: false,
+            timeZone: profile.timezone,
+          })
+        );
+
+        if (hour === 17) {
+          await curateMemory(phone);
+        }
+      } catch (err) {
+        console.error(`Memory curation error for ${phone}:`, err);
       }
     }
   });

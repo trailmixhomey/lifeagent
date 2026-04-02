@@ -1,102 +1,1082 @@
 {
-  "UC Berkeley": {
-    "canvas_url": "https://bcourses.berkeley.edu",
-    "nickname": "bCourses",
-    "timezone": "America/Los_Angeles"
+  "Harvard": {
+    "canvas_url": "https://canvas.harvard.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Harvard University"]
   },
-  "UCLA": {
-    "canvas_url": "https://bruinlearn.ucla.edu",
-    "nickname": "BruinLearn",
-    "timezone": "America/Los_Angeles"
+  "Yale": {
+    "canvas_url": "https://canvas.yale.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Yale University"]
+  },
+  "Princeton": {
+    "canvas_url": "https://canvas.princeton.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Princeton University"]
+  },
+  "Columbia": {
+    "canvas_url": "https://courseworks2.columbia.edu",
+    "nickname": "CourseWorks",
+    "timezone": "America/New_York",
+    "aliases": ["Columbia University"]
+  },
+  "Cornell": {
+    "canvas_url": "https://canvas.cornell.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Cornell University"]
+  },
+  "Brown": {
+    "canvas_url": "https://canvas.brown.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Brown University"]
+  },
+  "Dartmouth": {
+    "canvas_url": "https://canvas.dartmouth.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Dartmouth College"]
+  },
+  "University of Pennsylvania": {
+    "canvas_url": "https://canvas.upenn.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Penn", "UPenn"]
   },
   "Stanford": {
     "canvas_url": "https://canvas.stanford.edu",
     "nickname": "Canvas",
-    "timezone": "America/Los_Angeles"
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Stanford University"]
   },
-  "University of Michigan": {
-    "canvas_url": "https://umich.instructure.com",
+  "MIT": {
+    "canvas_url": "https://canvas.mit.edu",
     "nickname": "Canvas",
-    "timezone": "America/New_York"
+    "timezone": "America/New_York",
+    "aliases": ["Massachusetts Institute of Technology"]
   },
-  "University of Texas Austin": {
-    "canvas_url": "https://utexas.instructure.com",
+  "Duke": {
+    "canvas_url": "https://canvas.duke.edu",
     "nickname": "Canvas",
-    "timezone": "America/Chicago"
+    "timezone": "America/New_York",
+    "aliases": ["Duke University"]
   },
-  "University of Florida": {
-    "canvas_url": "https://ufl.instructure.com",
+  "Johns Hopkins": {
+    "canvas_url": "https://canvas.jhu.edu",
     "nickname": "Canvas",
-    "timezone": "America/New_York"
-  },
-  "Ohio State University": {
-    "canvas_url": "https://osu.instructure.com",
-    "nickname": "Canvas",
-    "timezone": "America/New_York"
-  },
-  "University of Washington": {
-    "canvas_url": "https://canvas.uw.edu",
-    "nickname": "Canvas",
-    "timezone": "America/Los_Angeles"
-  },
-  "NYU": {
-    "canvas_url": "https://newclasses.nyu.edu",
-    "nickname": "Canvas",
-    "timezone": "America/New_York"
-  },
-  "University of Wisconsin Madison": {
-    "canvas_url": "https://canvas.wisc.edu",
-    "nickname": "Canvas",
-    "timezone": "America/Chicago"
-  },
-  "Penn State": {
-    "canvas_url": "https://psu.instructure.com",
-    "nickname": "Canvas",
-    "timezone": "America/New_York"
-  },
-  "University of Illinois": {
-    "canvas_url": "https://canvas.illinois.edu",
-    "nickname": "Canvas",
-    "timezone": "America/Chicago"
-  },
-  "Indiana University": {
-    "canvas_url": "https://iu.instructure.com",
-    "nickname": "Canvas",
-    "timezone": "America/New_York"
-  },
-  "University of Colorado Boulder": {
-    "canvas_url": "https://canvas.colorado.edu",
-    "nickname": "Canvas",
-    "timezone": "America/Denver"
-  },
-  "Arizona State University": {
-    "canvas_url": "https://canvas.asu.edu",
-    "nickname": "Canvas",
-    "timezone": "America/Phoenix"
-  },
-  "University of Virginia": {
-    "canvas_url": "https://canvas.virginia.edu",
-    "nickname": "Canvas",
-    "timezone": "America/New_York"
+    "timezone": "America/New_York",
+    "aliases": ["JHU", "Johns Hopkins University"]
   },
   "Northwestern": {
     "canvas_url": "https://canvas.northwestern.edu",
     "nickname": "Canvas",
-    "timezone": "America/Chicago"
+    "timezone": "America/Chicago",
+    "aliases": ["Northwestern University"]
   },
-  "Boston University": {
-    "canvas_url": "https://learn.bu.edu",
+  "Rice": {
+    "canvas_url": "https://canvas.rice.edu",
     "nickname": "Canvas",
-    "timezone": "America/New_York"
+    "timezone": "America/Chicago",
+    "aliases": ["Rice University"]
+  },
+  "Carnegie Mellon": {
+    "canvas_url": "https://canvas.cmu.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["CMU", "Carnegie Mellon University", "Carnegie Melon"]
+  },
+  "Georgetown": {
+    "canvas_url": "https://canvas.georgetown.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Georgetown University"]
+  },
+  "Emory": {
+    "canvas_url": "https://canvas.emory.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Emory University"]
+  },
+  "Tufts": {
+    "canvas_url": "https://canvas.tufts.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Tufts University"]
+  },
+  "Boston College": {
+    "canvas_url": "https://bostoncollege.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["BC"]
+  },
+  "Northeastern": {
+    "canvas_url": "https://canvas.northeastern.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Northeastern University", "NEU"]
+  },
+  "Notre Dame": {
+    "canvas_url": "https://canvas.nd.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Indiana/Indianapolis",
+    "aliases": ["University of Notre Dame"]
+  },
+  "Wake Forest": {
+    "canvas_url": "https://wfu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Wake Forest University", "Wake"]
+  },
+  "Tulane": {
+    "canvas_url": "https://tulane.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Tulane University"]
+  },
+  "Brandeis": {
+    "canvas_url": "https://brandeis.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Brandeis University"]
+  },
+  "Case Western": {
+    "canvas_url": "https://canvas.case.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Case Western Reserve", "CWRU"]
+  },
+  "Lehigh": {
+    "canvas_url": "https://lehigh.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Lehigh University"]
+  },
+  "UC Berkeley": {
+    "canvas_url": "https://bcourses.berkeley.edu",
+    "nickname": "bCourses",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Berkeley", "Cal", "UCB"]
+  },
+  "UCLA": {
+    "canvas_url": "https://bruinlearn.ucla.edu",
+    "nickname": "BruinLearn",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["University of California Los Angeles"]
+  },
+  "UC San Diego": {
+    "canvas_url": "https://canvas.ucsd.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["UCSD"]
+  },
+  "UC Davis": {
+    "canvas_url": "https://canvas.ucdavis.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["UCD"]
+  },
+  "UC Irvine": {
+    "canvas_url": "https://canvas.eee.uci.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["UCI"]
+  },
+  "UC Santa Barbara": {
+    "canvas_url": "https://canvas.ucsb.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["UCSB"]
+  },
+  "UC Santa Cruz": {
+    "canvas_url": "https://canvas.ucsc.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["UCSC"]
+  },
+  "UC Riverside": {
+    "canvas_url": "https://canvas.ucr.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["UCR"]
+  },
+  "UC Merced": {
+    "canvas_url": "https://ucmerced.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["UCM"]
+  },
+  "University of Michigan": {
+    "canvas_url": "https://umich.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Michigan", "UMich", "U of M"]
+  },
+  "University of Wisconsin Madison": {
+    "canvas_url": "https://canvas.wisc.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Wisconsin", "UW Madison", "Wisc"]
+  },
+  "University of Illinois": {
+    "canvas_url": "https://canvas.illinois.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Illinois", "UIUC", "U of I"]
   },
   "University of Minnesota": {
     "canvas_url": "https://canvas.umn.edu",
     "nickname": "Canvas",
-    "timezone": "America/Chicago"
+    "timezone": "America/Chicago",
+    "aliases": ["Minnesota", "UMN"]
   },
-  "Purdue": {
-    "canvas_url": "https://purdue.instructure.com",
+  "Ohio State": {
+    "canvas_url": "https://osu.instructure.com",
     "nickname": "Canvas",
-    "timezone": "America/New_York"
+    "timezone": "America/New_York",
+    "aliases": ["Ohio State University", "OSU", "tOSU"]
+  },
+  "Penn State": {
+    "canvas_url": "https://psu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Penn State University", "PSU", "Pennsylvania State"]
+  },
+  "Indiana University": {
+    "canvas_url": "https://iu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Indiana/Indianapolis",
+    "aliases": ["Indiana", "IU", "IU Bloomington"]
+  },
+  "University of Iowa": {
+    "canvas_url": "https://uiowa.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Iowa", "UIowa"]
+  },
+  "University of Nebraska": {
+    "canvas_url": "https://canvas.unl.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Nebraska", "UNL"]
+  },
+  "Rutgers": {
+    "canvas_url": "https://canvas.rutgers.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Rutgers University"]
+  },
+  "University of Maryland": {
+    "canvas_url": "https://umd.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Maryland", "UMD", "College Park"]
+  },
+  "Michigan State": {
+    "canvas_url": "https://msu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Michigan State University", "MSU"]
+  },
+  "University of Texas Austin": {
+    "canvas_url": "https://utexas.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["UT Austin", "Texas", "UT", "University of Texas"]
+  },
+  "Texas A&M": {
+    "canvas_url": "https://canvas.tamu.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["TAMU", "A&M"]
+  },
+  "University of Florida": {
+    "canvas_url": "https://ufl.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Florida", "UF", "UFL"]
+  },
+  "Florida State": {
+    "canvas_url": "https://canvas.fsu.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Florida State University", "FSU"]
+  },
+  "University of Central Florida": {
+    "canvas_url": "https://ucf.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["UCF", "Central Florida"]
+  },
+  "University of South Florida": {
+    "canvas_url": "https://usf.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["USF", "South Florida"]
+  },
+  "University of Georgia": {
+    "canvas_url": "https://uga.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Georgia", "UGA"]
+  },
+  "Georgia Tech": {
+    "canvas_url": "https://canvas.gatech.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Georgia Institute of Technology", "GT"]
+  },
+  "University of North Carolina": {
+    "canvas_url": "https://canvas.unc.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["UNC", "Chapel Hill", "UNC Chapel Hill"]
+  },
+  "NC State": {
+    "canvas_url": "https://ncsu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["North Carolina State", "NCSU"]
+  },
+  "University of Virginia": {
+    "canvas_url": "https://canvas.virginia.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Virginia", "UVA"]
+  },
+  "Virginia Tech": {
+    "canvas_url": "https://canvas.vt.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Virginia Tech University", "VT"]
+  },
+  "University of South Carolina": {
+    "canvas_url": "https://sc.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["South Carolina", "USC Columbia"]
+  },
+  "Clemson": {
+    "canvas_url": "https://clemson.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Clemson University"]
+  },
+  "University of Kentucky": {
+    "canvas_url": "https://uk.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Kentucky", "UK"]
+  },
+  "University of Tennessee": {
+    "canvas_url": "https://utk.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Tennessee", "UTK", "UT Knoxville"]
+  },
+  "University of Alabama": {
+    "canvas_url": "https://ua.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Alabama", "Bama", "UA"]
+  },
+  "Auburn": {
+    "canvas_url": "https://auburn.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Auburn University"]
+  },
+  "University of Mississippi": {
+    "canvas_url": "https://olemiss.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Ole Miss", "Mississippi"]
+  },
+  "Mississippi State": {
+    "canvas_url": "https://msstate.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Mississippi State University", "MSU"]
+  },
+  "LSU": {
+    "canvas_url": "https://lsu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Louisiana State", "Louisiana State University"]
+  },
+  "University of Arkansas": {
+    "canvas_url": "https://uark.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Arkansas", "UARK"]
+  },
+  "University of Missouri": {
+    "canvas_url": "https://umsystem.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Missouri", "Mizzou"]
+  },
+  "University of Oklahoma": {
+    "canvas_url": "https://canvas.ou.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Oklahoma", "OU"]
+  },
+  "Oklahoma State": {
+    "canvas_url": "https://okstate.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Oklahoma State University", "OKState", "OSU"]
+  },
+  "University of Kansas": {
+    "canvas_url": "https://canvas.ku.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Kansas", "KU"]
+  },
+  "Kansas State": {
+    "canvas_url": "https://canvas.k-state.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Kansas State University", "KSU", "K-State"]
+  },
+  "Iowa State": {
+    "canvas_url": "https://canvas.iastate.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Iowa State University", "ISU"]
+  },
+  "West Virginia": {
+    "canvas_url": "https://wvu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["West Virginia University", "WVU"]
+  },
+  "University of Southern California": {
+    "canvas_url": "https://usc.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["USC", "Southern Cal"]
+  },
+  "University of Washington": {
+    "canvas_url": "https://canvas.uw.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["UW", "Washington", "UDub"]
+  },
+  "University of Oregon": {
+    "canvas_url": "https://canvas.uoregon.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Oregon", "UO"]
+  },
+  "Oregon State": {
+    "canvas_url": "https://canvas.oregonstate.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Oregon State University", "OSU"]
+  },
+  "University of Colorado Boulder": {
+    "canvas_url": "https://canvas.colorado.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Denver",
+    "aliases": ["Colorado", "CU Boulder", "CU"]
+  },
+  "Colorado State": {
+    "canvas_url": "https://colostate.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Denver",
+    "aliases": ["Colorado State University", "CSU"]
+  },
+  "University of Utah": {
+    "canvas_url": "https://canvas.utah.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Denver",
+    "aliases": ["Utah", "U of U"]
+  },
+  "BYU": {
+    "canvas_url": "https://byu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Denver",
+    "aliases": ["Brigham Young", "Brigham Young University"]
+  },
+  "Arizona State": {
+    "canvas_url": "https://canvas.asu.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Phoenix",
+    "aliases": ["Arizona State University", "ASU"]
+  },
+  "University of Arizona": {
+    "canvas_url": "https://arizona.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Phoenix",
+    "aliases": ["Arizona", "UArizona"]
+  },
+  "University of New Mexico": {
+    "canvas_url": "https://canvas.unm.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Denver",
+    "aliases": ["New Mexico", "UNM"]
+  },
+  "University of Nevada Las Vegas": {
+    "canvas_url": "https://unlv.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["UNLV"]
+  },
+  "University of Nevada Reno": {
+    "canvas_url": "https://unr.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["UNR", "Nevada"]
+  },
+  "University of Hawaii": {
+    "canvas_url": "https://canvas.hawaii.edu",
+    "nickname": "Canvas",
+    "timezone": "Pacific/Honolulu",
+    "aliases": ["Hawaii", "UH"]
+  },
+  "University of Pittsburgh": {
+    "canvas_url": "https://canvas.pitt.edu",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Pitt", "Pittsburgh"]
+  },
+  "Temple": {
+    "canvas_url": "https://temple.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Temple University"]
+  },
+  "Drexel": {
+    "canvas_url": "https://drexel.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Drexel University"]
+  },
+  "University of Delaware": {
+    "canvas_url": "https://udel.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Delaware", "UDel"]
+  },
+  "University of Connecticut": {
+    "canvas_url": "https://uconn.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["UConn", "Connecticut"]
+  },
+  "University of Massachusetts Amherst": {
+    "canvas_url": "https://umass.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["UMass", "UMass Amherst", "Amherst"]
+  },
+  "University of Vermont": {
+    "canvas_url": "https://uvm.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Vermont", "UVM"]
+  },
+  "University of New Hampshire": {
+    "canvas_url": "https://unh.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["UNH", "New Hampshire"]
+  },
+  "University of Rhode Island": {
+    "canvas_url": "https://uri.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["URI", "Rhode Island"]
+  },
+  "Syracuse": {
+    "canvas_url": "https://syracuse.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Syracuse University", "Cuse"]
+  },
+  "Stony Brook": {
+    "canvas_url": "https://stonybrook.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Stony Brook University", "SUNY Stony Brook", "SBU"]
+  },
+  "Binghamton": {
+    "canvas_url": "https://binghamton.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Binghamton University", "SUNY Binghamton"]
+  },
+  "University at Albany": {
+    "canvas_url": "https://albany.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Albany", "SUNY Albany", "UAlbany"]
+  },
+  "San Diego State": {
+    "canvas_url": "https://canvas.sdsu.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["SDSU", "San Diego State University"]
+  },
+  "San Jose State": {
+    "canvas_url": "https://sjsu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["SJSU", "San Jose State University"]
+  },
+  "Cal Poly SLO": {
+    "canvas_url": "https://calpoly.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Cal Poly", "Cal Poly San Luis Obispo"]
+  },
+  "Cal State Long Beach": {
+    "canvas_url": "https://csulb.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["CSULB", "Long Beach State"]
+  },
+  "Cal State Fullerton": {
+    "canvas_url": "https://csuf.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["CSUF", "Fullerton"]
+  },
+  "Cal State Northridge": {
+    "canvas_url": "https://canvas.csun.edu",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["CSUN", "Northridge"]
+  },
+  "Sacramento State": {
+    "canvas_url": "https://csus.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Sac State", "CSUS"]
+  },
+  "Fresno State": {
+    "canvas_url": "https://fresnostate.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["CSU Fresno"]
+  },
+  "San Francisco State": {
+    "canvas_url": "https://sfsu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["SFSU", "SF State"]
+  },
+  "Cal State LA": {
+    "canvas_url": "https://calstatela.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["CSULA"]
+  },
+  "University of Houston": {
+    "canvas_url": "https://uh.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Houston", "UH"]
+  },
+  "Texas Tech": {
+    "canvas_url": "https://ttu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Texas Tech University", "TTU"]
+  },
+  "Texas State": {
+    "canvas_url": "https://txstate.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Texas State University", "TXST"]
+  },
+  "UT Dallas": {
+    "canvas_url": "https://utdallas.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["University of Texas at Dallas", "UTD"]
+  },
+  "UT San Antonio": {
+    "canvas_url": "https://utsa.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["University of Texas at San Antonio", "UTSA"]
+  },
+  "UT Arlington": {
+    "canvas_url": "https://uta.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["University of Texas at Arlington", "UTA"]
+  },
+  "Baylor": {
+    "canvas_url": "https://baylor.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Baylor University"]
+  },
+  "TCU": {
+    "canvas_url": "https://tcu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Texas Christian", "Texas Christian University"]
+  },
+  "SMU": {
+    "canvas_url": "https://smu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Southern Methodist", "Southern Methodist University"]
+  },
+  "University of North Texas": {
+    "canvas_url": "https://unt.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["North Texas", "UNT"]
+  },
+  "George Washington": {
+    "canvas_url": "https://gwu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["George Washington University", "GW", "GWU"]
+  },
+  "American University": {
+    "canvas_url": "https://american.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["American", "AU"]
+  },
+  "Howard": {
+    "canvas_url": "https://howard.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Howard University"]
+  },
+  "University of Miami": {
+    "canvas_url": "https://miami.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Miami", "UM"]
+  },
+  "Florida International": {
+    "canvas_url": "https://fiu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["FIU", "Florida International University"]
+  },
+  "Florida Atlantic": {
+    "canvas_url": "https://fau.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["FAU", "Florida Atlantic University"]
+  },
+  "Georgia State": {
+    "canvas_url": "https://gsu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Georgia State University", "GSU"]
+  },
+  "University of Louisville": {
+    "canvas_url": "https://louisville.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Louisville", "UofL"]
+  },
+  "University of Cincinnati": {
+    "canvas_url": "https://uc.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Cincinnati", "UC"]
+  },
+  "University of Dayton": {
+    "canvas_url": "https://udayton.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Dayton", "UD"]
+  },
+  "Kent State": {
+    "canvas_url": "https://kent.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Kent State University"]
+  },
+  "University of Akron": {
+    "canvas_url": "https://uakron.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Akron"]
+  },
+  "Marquette": {
+    "canvas_url": "https://marquette.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Marquette University"]
+  },
+  "DePaul": {
+    "canvas_url": "https://depaul.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["DePaul University"]
+  },
+  "Loyola Chicago": {
+    "canvas_url": "https://luc.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Loyola University Chicago", "LUC"]
+  },
+  "University of Illinois Chicago": {
+    "canvas_url": "https://uic.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["UIC"]
+  },
+  "Northern Illinois": {
+    "canvas_url": "https://niu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Northern Illinois University", "NIU"]
+  },
+  "Saint Louis University": {
+    "canvas_url": "https://slu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["SLU", "Saint Louis"]
+  },
+  "Creighton": {
+    "canvas_url": "https://creighton.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["Creighton University"]
+  },
+  "University of Denver": {
+    "canvas_url": "https://du.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Denver",
+    "aliases": ["Denver", "DU"]
+  },
+  "Gonzaga": {
+    "canvas_url": "https://gonzaga.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Gonzaga University"]
+  },
+  "Seattle University": {
+    "canvas_url": "https://seattleu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Seattle U"]
+  },
+  "Washington State": {
+    "canvas_url": "https://wsu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Washington State University", "WSU", "Wazzu"]
+  },
+  "Portland State": {
+    "canvas_url": "https://pdx.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Portland State University", "PSU"]
+  },
+  "University of Montana": {
+    "canvas_url": "https://umt.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Denver",
+    "aliases": ["Montana"]
+  },
+  "Boise State": {
+    "canvas_url": "https://boisstate.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Boise",
+    "aliases": ["Boise State University"]
+  },
+  "University of Idaho": {
+    "canvas_url": "https://uidaho.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Boise",
+    "aliases": ["Idaho"]
+  },
+  "Fordham": {
+    "canvas_url": "https://fordham.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Fordham University"]
+  },
+  "St. John's": {
+    "canvas_url": "https://stjohns.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["St Johns", "Saint Johns"]
+  },
+  "Hofstra": {
+    "canvas_url": "https://hofstra.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Hofstra University"]
+  },
+  "Pace": {
+    "canvas_url": "https://pace.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Pace University"]
+  },
+  "Seton Hall": {
+    "canvas_url": "https://shu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Seton Hall University"]
+  },
+  "Stevens Institute": {
+    "canvas_url": "https://stevens.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Stevens", "Stevens Institute of Technology"]
+  },
+  "RPI": {
+    "canvas_url": "https://rpi.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Rensselaer", "Rensselaer Polytechnic"]
+  },
+  "Rochester": {
+    "canvas_url": "https://rochester.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["University of Rochester"]
+  },
+  "RIT": {
+    "canvas_url": "https://rit.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Rochester Institute of Technology"]
+  },
+  "University of South Alabama": {
+    "canvas_url": "https://southalabama.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["South Alabama"]
+  },
+  "UAB": {
+    "canvas_url": "https://uab.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["University of Alabama at Birmingham"]
+  },
+  "Appalachian State": {
+    "canvas_url": "https://appstate.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Appalachian State University", "App State"]
+  },
+  "East Carolina": {
+    "canvas_url": "https://ecu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["East Carolina University", "ECU"]
+  },
+  "James Madison": {
+    "canvas_url": "https://jmu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["James Madison University", "JMU"]
+  },
+  "Old Dominion": {
+    "canvas_url": "https://odu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Old Dominion University", "ODU"]
+  },
+  "George Mason": {
+    "canvas_url": "https://gmu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["George Mason University", "GMU", "Mason"]
+  },
+  "William & Mary": {
+    "canvas_url": "https://wm.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["College of William and Mary", "W&M"]
+  },
+  "VCU": {
+    "canvas_url": "https://vcu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/New_York",
+    "aliases": ["Virginia Commonwealth", "Virginia Commonwealth University"]
+  },
+  "University of South Dakota": {
+    "canvas_url": "https://usd.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["South Dakota", "USD"]
+  },
+  "University of North Dakota": {
+    "canvas_url": "https://und.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["North Dakota", "UND"]
+  },
+  "North Dakota State": {
+    "canvas_url": "https://ndsu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["NDSU"]
+  },
+  "South Dakota State": {
+    "canvas_url": "https://sdstate.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Chicago",
+    "aliases": ["SDSU"]
+  },
+  "University of Wyoming": {
+    "canvas_url": "https://uwyo.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Denver",
+    "aliases": ["Wyoming"]
+  },
+  "Pepperdine": {
+    "canvas_url": "https://pepperdine.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Pepperdine University"]
+  },
+  "Loyola Marymount": {
+    "canvas_url": "https://lmu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["LMU", "Loyola Marymount University"]
+  },
+  "Santa Clara": {
+    "canvas_url": "https://scu.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Santa Clara University", "SCU"]
+  },
+  "University of San Diego": {
+    "canvas_url": "https://usd.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["USD"]
+  },
+  "University of San Francisco": {
+    "canvas_url": "https://usfca.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["USF"]
+  },
+  "Chapman": {
+    "canvas_url": "https://chapman.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Chapman University"]
+  },
+  "University of the Pacific": {
+    "canvas_url": "https://pacific.instructure.com",
+    "nickname": "Canvas",
+    "timezone": "America/Los_Angeles",
+    "aliases": ["Pacific", "UOP"]
   }
 }
